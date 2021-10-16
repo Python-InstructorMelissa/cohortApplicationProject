@@ -17,6 +17,15 @@
     </header>
     <main>
         <h1>About</h1>
+        <h1>{{session['name']}}</h1>
+        <P>{{session['description']}}</P>
+        <form action="/addAbout" method='post'>
+            <label for="name">Company Name: </label>
+            <input type="text" name='name'>
+            <label for="description">Description: </label>
+            <textarea name="description" cols="30" rows="10"></textarea>
+            <button>Add Content</button>
+        </form>
     </main>
     <footer>
         

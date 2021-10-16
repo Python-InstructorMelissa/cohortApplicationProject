@@ -17,6 +17,19 @@
     </header>
     <main>
         <h1>Welcome!</h1>
+        <h2>See a list of our Parks</h2>
+        {% for p in park %}
+            <div class="column">
+                <h3>Park Name: {{p.parkName}}</h3>
+                <h4>Park Location: {{p.location}}</h4>
+                <h4>Park Type: {{p.parkType}}</h4>
+                <ul>
+                    <li>Tickets: ${{p.tickets}}</li>
+                    <li>Hours: {{p.hours}}</li>
+                    <li>Parking: {{p.parking}}</li>
+                </ul>
+            </div>
+        {% endfor %}
     </main>
     <footer>
 

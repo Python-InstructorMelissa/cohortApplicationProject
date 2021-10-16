@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
 }
-.flecolumn {
+.flexcolumn {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,12 +19,12 @@
 @font: #a0e599;
 
 body {
-    .flecolumn();
+    .flexcolumn();
     background-color: @bg;
     color: @font;
 
     header {
-        .flecolumn();
+        .flexcolumn();
         width: 95%;
 
         nav {
@@ -37,9 +37,14 @@ body {
         }
     }
     main {
-        .flecolumn();
+        .flexcolumn();
+
+        .column {
+            .flexcolumn();
+            border: 5px groove @font;
+        }
     }
     footer {
-        .flecolumn();
+        .flexcolumn();
     }
 }
