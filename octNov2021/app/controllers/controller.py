@@ -1,30 +1,47 @@
 from app import app
 from flask import Flask, render_template, redirect, session, request
 from app.models.parks import Park
+from app.models.employees import Employee
 
-# ----------- Main landing page
+# -------------------- Main landing page
 @app.route('/')
 def index():
     return render_template('index.html', allParks=Park.getAll())
 
+# --------------- Get Routes
 
-
-# -------- create park landing
-@app.route('/park/addPark')
-def addPark():
-    return render_template('addpark.html')
-
-# ------- view park landing page
+# ----- view Park
 @app.route('/park/viewPark/<int:id>')
 def viewPark(id):
     data = {
         'id': id
     }
-    return render_template('viewPark.html', onePark=Park.getOne(data))
+    return render_template('viewPark.html', onePark=Park.getOne(data), park=Park.getWorkers(data))
 
+# ----- view Employee
+@app.route('/employees/viewEmployee/<int:id>')
+def viewEmployee(id):
+    data = {
+        'id': id
+    }
+    theJob=Employee.getJob(data)
+    return render_template('viewEmployee.html', worker=Employee.getOne(data), job=Employee.getJob(data), allParks=Park.getAll())
 
+# ---------- Forms
 
-# --------- hidden create park route
+# ----- Park form
+@app.route('/park/addPark')
+def addPark():
+    return render_template('addpark.html')
+
+# ----- Employee Form
+@app.route('/employees')
+def addEmployee():
+    return render_template('employees.html', allParks=Park.getAll(), allWorkers=Employee.getAll())
+
+# --------------- Create Routes
+
+# ----- Create Park
 @app.route('/park/createPark', methods=['POST'])
 def createpark():
     data = {
@@ -36,7 +53,21 @@ def createpark():
     Park.save(data)
     return redirect('/')
 
-# ------ hidden edit park route
+# ----- Create Employee
+@app.route('/employees/createEmployee', methods=['POST'])
+def createEmployee():
+    data = {
+        'eFirstName': request.form['eFirstName'],
+        'eLastName': request.form['eLastName'],
+        'eEmail': request.form['eEmail'],
+        'parks_id': request.form['parks_id']
+    }
+    Employee.save(data)
+    return redirect('/employees')
+
+# --------------- Update Routes
+
+# ----- Update Park
 @app.route('/park/updatePark/<int:id>', methods=['POST'])
 def updatePark(id):
     data = {
@@ -50,7 +81,25 @@ def updatePark(id):
     Park.update(data)
     return redirect(f"/park/viewPark/{parkId}")
 
-# ------- hidden remove park route
+# ----- Update Employee
+@app.route('/employee/updateEmployee/<int:id>', methods=['POST'])
+def updateEmployee(id):
+    data = {
+        'id': id,
+        'eFirstName': request.form['eFirstName'],
+        'eLastName': request.form['eLastName'],
+        'eEmail': request.form['eEmail'],
+        'parks_id': request.form['parks_id']
+    }
+    eId = id
+    Employee.update(data)
+    return redirect(f"/employees/viewEmployee/{eId}")
+
+
+
+# --------------- Delete Routes
+
+# ----- Delete Park
 @app.route('/park/deletePark/<int:id>')
 def deletePark(id):
     data = {

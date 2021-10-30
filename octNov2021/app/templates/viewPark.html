@@ -6,22 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='https://beedevservices.github.io/beedev-css/framework/beedev.css'>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title>Add New Park</title>
+    <title>{{onePark.parkName}}</title>
 </head>
 <body>
     <header>
         <h1>Dojo Parks Company</h1>
         <nav>
             <a href="/">Home</a>
-            <a href="/about">About</a>
             <a href='/park/addPark'>Add New Park</a>
+            <a href="/employees">Employees</a>
         </nav>
     </header>
     <main>
-        <h2>{{onePark.parkName}}</h2>
-        <h4>Is a {{onePark.parkType}} style park, Located in {{onePark.parkLocation}}</h4>
-        <p>{{onePark.parkDesc}}</p>
-        <button><a href="/park/deletePark/{{onePark.id}}">Remove Park</a></button>
+        <div class="column">
+            <h2>{{onePark.parkName}}</h2>
+            <h4>Is a {{onePark.parkType}} style park, Located in {{onePark.parkLocation}}</h4>
+            <p>{{onePark.parkDesc}}</p>
+            <button><a href="/park/deletePark/{{onePark.id}}">Remove Park</a></button>
+            <div class="columm">
+                <h4>List of Employee's at {{onePark.parkName}}</h4>
+                <ul>
+                    {% for w in park %}
+                        <li><a href="/employees/viewEmployee/{{w.id}}">{{w.eFirstName}} {{w.eLastName}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
 
         <form action="/park/updatePark/{{onePark.id}}" method='post'>
             <section>
@@ -40,7 +50,7 @@
                 <label for="parkType">Park Type: </label>
                 <input type="text" name='parkType' value='{{onePark.parkType}}'>
             </section>
-            <button>Add New Park</button>
+            <button>Update Park</button>
         </form>
     </main>
 </body>
