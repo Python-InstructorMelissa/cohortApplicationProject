@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://beedevservices.github.io/beedev-css/framework/beedev.css'>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>Dojo Parks Company</title>
 </head>
@@ -13,22 +14,15 @@
         <nav>
             <a href="/">Home</a>
             <a href="/about">About</a>
+            <a href='/park/addPark'>Add New Park</a>
         </nav>
     </header>
     <main>
         <h1>Welcome!</h1>
         <h2>See a list of our Parks</h2>
-        {% for p in park %}
-            <div class="column">
-                <h3>Park Name: {{p.parkName}}</h3>
-                <h4>Park Location: {{p.location}}</h4>
-                <h4>Park Type: {{p.parkType}}</h4>
-                <ul>
-                    <li>Tickets: ${{p.tickets}}</li>
-                    <li>Hours: {{p.hours}}</li>
-                    <li>Parking: {{p.parking}}</li>
-                </ul>
-            </div>
+        {% for p in allParks %}
+            <h3>{{p.parkName}}</h3>
+            <button><a href="/park/viewPark/{{p.id}}">View Park Info</a></button>
         {% endfor %}
     </main>
     <footer>

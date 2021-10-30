@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://beedevservices.github.io/beedev-css/framework/beedev.css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Add New Park</title>
+</head>
+<body>
+    <header>
+        <h1>Dojo Parks Company</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href='/park/addPark'>Add New Park</a>
+        </nav>
+    </header>
+    <main>
+        <h2>{{onePark.parkName}}</h2>
+        <h4>Is a {{onePark.parkType}} style park, Located in {{onePark.parkLocation}}</h4>
+        <p>{{onePark.parkDesc}}</p>
+        <button><a href="/park/deletePark/{{onePark.id}}">Remove Park</a></button>
+
+        <form action="/park/updatePark/{{onePark.id}}" method='post'>
+            <section>
+                <label for="parkName">Park Name: </label>
+                <input type="text" name='parkName' value='{{onePark.parkName}}'>
+            </section>
+            <section>
+                <label for="parkDesc">Park Description: </label>
+                <textarea name="parkDesc" cols="30" rows="10">{{onePark.parkDesc}}</textarea>
+            </section>
+            <section>
+                <label for="parkLocation">Park Location: </label>
+                <input type="text" name='parkLocation' value='{{onePark.parkLocation}}'>
+            </section>
+            <section>
+                <label for="parkType">Park Type: </label>
+                <input type="text" name='parkType' value='{{onePark.parkType}}'>
+            </section>
+            <button>Add New Park</button>
+        </form>
+    </main>
+</body>
+</html>
