@@ -54,7 +54,11 @@ body main .column {
   border: 5px groove #a0e599;
   padding: 0.5em;
 }
-body main .row h4 {
+body main .row .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border: 5px groove #a0e599;
   padding: 0.5em;
   margin: 1em;

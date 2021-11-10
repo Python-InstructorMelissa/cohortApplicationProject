@@ -21,7 +21,10 @@
         <h3>List of all Employee's: </h3>
         <div class="row wrap">
             {% for w in allWorkers %}
-                <h4>* {{w.eFirstName}} {{w.eLastName}}</h4>
+               <div class="column">
+                <h4>{{w.eFirstName}} {{w.eLastName}}</h4>
+                <button><a href="/employees/viewEmployee/{{w.id}}">View Employee</a></button>
+               </div>
             {% endfor %}
         </div>
         <form action="/employees/createEmployee" method='post'>

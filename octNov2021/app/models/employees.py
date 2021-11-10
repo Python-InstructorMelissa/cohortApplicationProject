@@ -9,6 +9,7 @@ class Employee:
         self.eLastName = data['eLastName']
         self.eEmail = data['eEmail']
         self.job = []
+        self.address = []
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
 
@@ -35,17 +36,17 @@ class Employee:
     def getJob(cls, data):
         query = "SELECT * FROM employees LEFT JOIN parks on parks.id = employees.parks_id WHERE employees.id = %(id)s;"
         results = connectToMySQL(cls.db_name).query_db(query, data)
-        print("Get Job results: ", results)
+        # print("Get Job results: ", results)
         j = cls(results[0])
-        print("job before: ", j.job)
+        # print("job before: ", j.job)
         for row in results:
             theJ = {
                 'parkName': row['parkName']
             }
-            print("print theJ: ", theJ)
+            # print("print theJ: ", theJ)
             j.job.append((theJ))
-            print("job after: ", j.job)
-        print("printing job: ", j.job)
+            # print("job after: ", j.job)
+        # print("printing job: ", j.job)
         return j.job
 
     @classmethod

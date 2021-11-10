@@ -65,6 +65,8 @@ def createEmployee():
     Employee.save(data)
     return redirect('/employees')
 
+@app.route('/employee')
+
 # --------------- Update Routes
 
 # ----- Update Park
@@ -93,7 +95,7 @@ def updateEmployee(id):
     }
     eId = id
     Employee.update(data)
-    return redirect(f"/employees/viewEmployee/{eId}")
+    return redirect(f"/employee/viewEmployee/{eId}")
 
 
 
@@ -107,3 +109,12 @@ def deletePark(id):
     }
     Park.delete(data)
     return redirect('/')
+
+# ----- Delete Employee
+@app.route('/employee/deleteEmployee/<int:id>')
+def deleteEmployee(id):
+    data = {
+        'id': id
+    }
+    Employee.delete(data)
+    return redirect('/employees')
