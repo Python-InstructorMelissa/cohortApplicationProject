@@ -63,3 +63,24 @@ class Employee:
     def delete(cls, data):
         query = "DELETE FROM employees WHERE id = %(id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data)
+
+    @classmethod
+    def getAddress(cls, data):
+        query = "SELECT * FROM employees LEFT JOIN employeeAddress on employees.id = employees_id WHERE employees.id = %(id)s;"
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        # print("Get Job results: ", results)
+        e = cls(results[0])
+        # print("job before: ", j.job)
+        for row in results:
+            theA = {
+                'eStreet': row['eStreet'],
+                'eCity': row['eCity'],
+                'eState': row['eState'],
+                'eZip': row['eZip'],
+                'employees_id': row['employees_id']
+            }
+            # print("print theJ: ", theJ)
+            e.address.append((theA))
+            # print("job after: ", j.job)
+        # print("printing job: ", j.job)
+        return e.address

@@ -2,13 +2,8 @@ from app import app
 from flask import Flask, render_template, redirect, session, request
 from app.models.parks import Park
 from app.models.employees import Employee
+from app.models.eAddress import EmployAddress
 
-# -------------------- Main landing page
-@app.route('/')
-def index():
-    return render_template('index.html', allParks=Park.getAll())
-
-# --------------- Get Routes
 
 # ----- view Park
 @app.route('/park/viewPark/<int:id>')
@@ -24,7 +19,7 @@ def viewEmployee(id):
     data = {
         'id': id
     }
-    return render_template('viewEmployee.html', worker=Employee.getOne(data), job=Employee.getJob(data), allParks=Park.getAll())
+    return render_template('viewEmployee.html', worker=Employee.getOne(data), job=Employee.getJob(data), allParks=Park.getAll(), address=Employee.getAddress(data))
 
 # ---------- Forms
 
@@ -64,7 +59,17 @@ def createEmployee():
     Employee.save(data)
     return redirect('/employees')
 
-@app.route('/employee')
+@app.route('/employee/createAddress', methods=['POST'])
+def createEmplAddress():
+    data = {
+        'eStreet': request.form['eStreet'],
+        'eCity': request.form['eCity'],
+        'eState': request.form['eState'],
+        'eZip': request.form['eZip'],
+        'employees_id': request.form['employees_id']
+    }
+    EmployAddress.save(data)
+    return redirect('/employees')
 
 # --------------- Update Routes
 

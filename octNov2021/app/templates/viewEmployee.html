@@ -24,6 +24,13 @@
             {% for j in job %}
                 <h4>Works at: {{j.parkName}}</h4>
             {% endfor %}
+            <h4>{{worker.eFirstName}}'s Address:</h4>
+            <address>
+                {% for a in address %}
+                    {{a.eStreet}}<br>
+                    {{a.eCity}}, {{a.eState}} {{a.eZip}}
+                {% endfor %}
+            </address>
             <button><a href="/employees/deleteEmployee/{{worker.id}}">Delete Employee</a></button>
         </div>
         <div class="row">
@@ -53,24 +60,23 @@
             </form>
             <form action="/employee/createAddress" method='post'>
                 <section>
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="eStreet">Street: </label>
+                    <input type="text" name='eStreet'>
                 </section>
                 <section>
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="eCity">City: </label>
+                    <input type="text" name='eCity'>
                 </section>
                 <section>
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="eState">State: </label>
+                    <input type="text" name='eState'>
                 </section>
                 <section>
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="eZip">eZip</label>
+                    <input type="text" name='eZip'>
                 </section>
                 <section>
-                    <label for=""></label>
-                    <input type="text">
+                    <input type="hidden" name='employees_id' value='{{worker.id}}'>
                 </section>
                 <button>Add Address</button>
             </form>

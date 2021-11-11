@@ -16,3 +16,7 @@ def publicPark(id):
         'id': id
     }
     return render_template('viewPark.html', onePark=Park.getOne(data))
+
+@app.route('/admin')
+def logReg():
+    return render_template('logReg.html')

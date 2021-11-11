@@ -20,7 +20,7 @@ class EmployAddress:
 
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO employeeAddress (eStreet, eCity, eState, eZip) VALUES (%(eStreet)s, %(cCity)s, %(sState)s, %(eZip)s);'
+        query = 'INSERT INTO employeeAddress (eStreet, eCity, eState, eZip, employees_id) VALUES (%(eStreet)s, %(eCity)s, %(eState)s, %(eZip)s, %(employees_id)s);'
         return connectToMySQL(cls.db_name).query_db(query, data)
 
     @classmethod
