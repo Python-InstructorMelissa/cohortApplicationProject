@@ -1,0 +1,45 @@
+.flexrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.flecolumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.a {
+    text-decoration: none;
+    color: @font;
+}
+
+@bg: #661818;
+@font: #a0e599;
+
+body {
+    .flecolumn();
+    background-color: @bg;
+    color: @font;
+
+    header {
+        .flecolumn();
+        width: 95%;
+
+        nav {
+            .flexrow();
+            justify-content: space-evenly;
+
+            a {
+                .a();
+            }
+        }
+    }
+    main {
+        .flecolumn();
+    }
+    footer {
+        .flecolumn();
+    }
+}
