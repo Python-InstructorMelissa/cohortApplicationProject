@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Inventory Application</title>
+</head>
+<body>
+    <header>
+        <h1>Inventory Application</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <h1>Inventory Categories</h1>
+        <form action="/createCategory/" method='post'>
+            <section>
+                <label for="categoryName">Name: </label>
+                <input type="text" name="categoryName">
+            </section>
+            <section>
+                <label for="categoryInfo">Description: </label>
+                <textarea name="categoryInfo" id="" cols="30" rows="10"></textarea>
+            </section>
+            <section>
+                
+            </section>
+            <button>Add Category</button>
+        </form>
+        <h2>Current Categories:</h2>
+        <ul>
+            {% for cat in cats %}
+                <li>{{cat.categoryName}}</li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>
