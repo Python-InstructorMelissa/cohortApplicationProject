@@ -24,24 +24,16 @@
         {% endwith %}
     </section>
     <main>
-        <h1>Inventory Categories</h1>
-        <form action="/createCategory/" method='post'>
-            <section>
-                <label for="categoryName">Name: </label>
-                <input type="text" name="categoryName">
-            </section>
-            <section>
-                <label for="categoryInfo">Description: </label>
-                <textarea name="categoryInfo" id="" cols="30" rows="10"></textarea>
-            </section>
-            <button>Add Category</button>
-        </form>
-        <h2>Current Categories:</h2>
+        <h1>Welcome to your Dashboard {{user.firstName}}</h1>
+
+        <h3>Here are your current items: {{user.firstName}}</h3>
+        <!-- make sure you use the self.itemList that was created for the join to call it here -->
         <ul>
-            {% for cat in cats %}
-                <li>{{cat.categoryName}}</li>
+            {% for items in usersItems.itemList %}
+                <li>{{items.itemName}}</li>
             {% endfor %}
         </ul>
+        
     </main>
     <footer>
 

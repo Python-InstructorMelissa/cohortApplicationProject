@@ -14,8 +14,62 @@
             {% block menu %} {% include 'menu.html' %} {% endblock menu %}
         </nav>
     </header>
+    <section class="flash">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for m in messages %}
+                    <h3>{{m}}</h3>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </section>
     <main>
-
+        <h1>Items</h1>
+        <form action="/createItem/" method='post'>
+            <section>
+                <label for="itemName">Name: </label>
+                <input type="text" name="itemName">
+            </section>
+            <section>
+                <label for="itemInfo">Description: </label>
+                <textarea name="itemInfo" cols="30" rows="10"></textarea>
+            </section>
+            <section>
+                <label for="category_id">Select a Category</label>
+                <select name="category_id">
+                    {% for cat in cats %}
+                        <option value="{{cat.id}}">{{cat.categoryName}}</option>
+                    {% endfor %}
+                </select>
+            </section>
+            <section>
+                <input type="hidden" name="user_id" value='{{user.id}}'>
+            </section>
+            <button>Add Item</button>
+        </form>
+        <h2>All Current Items</h2>
+        <table>
+            <tr>
+                <th>Item Name</th>
+                <th>Item Category</th>
+                <th>Added By</th>
+            </tr>
+            {% for item in items %}
+                <tr>
+                    <td>{{item.itemName}}</td>
+                    {% for cat in cats %}
+                        {% if cat.id == item.category_id %}
+                            <td>{{cat.categoryName}}</td>
+                        {% endif %}
+                    {% endfor %}
+                    {% for user in users %}
+                        {% if user.id == item.user_id %}
+                            <td>{{user.firstName}}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
     </main>
     <footer>
 

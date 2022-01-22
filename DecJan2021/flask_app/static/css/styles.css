@@ -1,8 +1,22 @@
+.flexcolumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.flexrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #8b8beb;
+  color: #fff;
 }
 body header {
   display: flex;
@@ -14,11 +28,12 @@ body header {
 body header nav {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  justify-content: space-evenly;
   width: 100%;
   margin: 1em;
-  border: 3px groove purple;
+  border: 3px groove #800080;
 }
 body header nav a {
   text-decoration: none;
@@ -27,10 +42,29 @@ body header nav a {
   padding: 1em;
   border: 3px groove #c582c5;
 }
+body .flash {
+  background-color: #ff000081;
+  color: #fff;
+}
+body .flash h3 {
+  padding: 1em;
+}
 body main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 95%;
+}
+body main .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+}
+body main .row form {
+  max-width: 500px;
+  margin: 1em;
+  padding: 1em;
 }

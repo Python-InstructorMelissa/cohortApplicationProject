@@ -6,8 +6,8 @@ class Items:
         self.id = data['id']
         self.itemName = data['itemName']
         self.itemInfo = data['itemInfo']
-        self.createdAt = data['createdAt']
-        self.updatedAt = data['updatedAt']
+        self.category_id = data['category_id']
+        self.user_id = data['user_id']
 
     @classmethod
     def getAll(cls):
@@ -28,6 +28,7 @@ class Items:
     @classmethod
     def save(cls, data):
         query = 'INSERT INTO items (itemName, itemInfo, category_id, user_id) VALUES (%(itemName)s, %(itemInfo)s, %(category_id)s, %(user_id)s);'
+        print("items from query save", query)
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
