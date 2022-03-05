@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow&family=VT323&display=swap');
+
+.flexcolumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flexrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: @red;
+    font-size: 1.8em;
+}
+h5 {
+    font-size: 1.5em;
+    color: @blue;
+    padding: 1em;
+    background-color: @bgShade;
+}
+li {
+    font-size: 1.4em;
+}
+
+h1 {
+    font-size: 3em;
+}
+h2 {
+    font-size: 2em;
+}
+
+@red: #ff0000;
+@pink: #f110b9;
+@blue: #0004ff;
+@purple: #f508f5;
+@white: #fff;
+@black: #000;
+@green: #0df50d;
+@yellow: #fbff00;
+@bgShade: #fbff0070;
+
+
+
+body {
+    .flexcolumn();
+    background-color: @black;
+    color: @pink;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-family: 'VT323', monospace;
+
+    header {
+        .flexcolumn();
+        width: 95%;
+
+        h1 {
+            color: @yellow;
+        }
+        
+        nav {
+            .flexrow();
+            width: 95%;
+
+            a {
+                padding: 1em;
+                margin: 1em;
+            }
+        }
+    }
+    main {
+        .flexcolumn();
+
+        h1 {
+            color: @green;
+        }
+
+        .row {
+            .flexrow();
+            flex-wrap: wrap;
+            width: 75%;
+            align-items: flex-start;
+
+            .column {
+                .flexcolumn();
+                margin: 1em;
+            }
+        }
+    }
+    footer {
+        .flexcolumn();
+        color: @white;
+    }
+}
