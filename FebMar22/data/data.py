@@ -56,9 +56,19 @@ movies = [
         'genre': "Syfy Drama"
     },
     {
-        'id': 1,
+        'id': 4,
         'title': "Back to the Future II",
         'year': 1986,
+        'actors': [
+            {'firstName': "Michael J", 'lastName': "Fox"},
+            {"firstName": "Christopher", 'lastName': "Lloyd"}
+        ],
+        'genre': "Syfy Drama"
+    },
+    {
+        'id': 5,
+        'title': "Back to the Future III",
+        'year': 1987,
         'actors': [
             {'firstName': "Michael J", 'lastName': "Fox"},
             {"firstName": "Christopher", 'lastName': "Lloyd"}
@@ -81,6 +91,6 @@ def checkActors(l, n): # pass in the list of movies and the name we want to chec
                 myList.append(m['title']) # adding the movie title to our empty list => m can still be called because this loop in inside the bigger one
     print("the final list: ", myList) # printing back the final results
 
-checkActors(movies, 'Michael J')
+# checkActors(movies, 'Michael J')
 
-print("one instance of a movie: ", movies[2])
+# print("one instance of a movie: ", movies[2])

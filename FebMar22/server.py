@@ -1,13 +1,15 @@
 from flask import Flask, render_template, request, session, redirect
 from data.data import movies
 from env import KEY
-import os
+# import os
+
 app = Flask(__name__)
 # app.secret_key = os.environ['KEY']
 app.secret_key = KEY
 
 @app.route('/')
 def index():
+    # print("All the movies: ", movies[0])
     return render_template('index.html', theMovies=movies)
 
 
