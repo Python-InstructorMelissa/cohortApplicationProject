@@ -20,7 +20,7 @@ a {
 }
 h5 {
     font-size: 1.5em;
-    color: @blue;
+    color: @white;
     padding: 1em;
     background-color: @bgShade;
 }
@@ -33,6 +33,10 @@ h1 {
 }
 h2 {
     font-size: 2em;
+}
+table, th, td {
+    border: 1px double @bgShade;
+    padding: 1em;
 }
 
 @red: #ff0000;
@@ -74,6 +78,7 @@ body {
     }
     main {
         .flexcolumn();
+        margin-bottom: 1em;
 
         h1 {
             color: @green;
@@ -88,6 +93,34 @@ body {
             .column {
                 .flexcolumn();
                 margin: 1em;
+            }
+        }
+        .collapsible {
+            color: @white;
+            cursor: pointer;
+            padding: 18px;
+            width: 50%;
+            border: none;
+            text-align: center;
+            outline: none;
+            font-size: 1.4em;
+            background-color: @bgShade;
+            margin: 1em;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-family: 'VT323', monospace;
+        }
+        .active, .collapsible:hover {
+            color: @green;
+            font-size: 1.8em;
+        }
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            width: 95%;
+
+            table {
+                width: 100%;
             }
         }
     }
