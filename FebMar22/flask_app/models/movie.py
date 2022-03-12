@@ -36,6 +36,7 @@ class Movie:
     @classmethod
     def save(cls, data):
         query = 'INSERT INTO movie (title, year, genre, description) VALUES (%(title)s, %(year)s, %(genre)s, %(description)s);'
+        print('save movie model:', data)
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod

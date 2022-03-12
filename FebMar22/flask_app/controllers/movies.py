@@ -25,3 +25,15 @@ def connectActor(movie_id):
 @app.route('/movies/add/')
 def addMovie():
     return render_template('addMovie.html')
+
+@app.route('/movies/create/', methods=['post'])
+def createMovie():
+    data = {
+        'title': request.form['title'],
+        'year': request.form['year'],
+        'genre': request.form['genre'],
+        'description': request.form['description'],
+    }
+    Movie.save(data)
+    print('create movie, controller: ', data)
+    return redirect('/movies/')

@@ -38,6 +38,11 @@ table, th, td {
     border: 1px double @bgShade;
     padding: 1em;
 }
+input, textarea {
+    background-color: @bgShade;
+    color: @white;
+    font-size: .8em;
+}
 
 @red: #ff0000;
 @pink: #f110b9;
@@ -79,6 +84,7 @@ body {
     main {
         .flexcolumn();
         margin-bottom: 1em;
+        width: 75%;
 
         h1 {
             color: @green;
@@ -121,6 +127,26 @@ body {
 
             table {
                 width: 100%;
+            }
+        }
+        form {
+            .flexcolumn();
+            padding: 1em;
+            width: 40%;
+            font-size: 1.4em;
+
+            section {
+                .flexrow();
+                width: 95%;
+                justify-content: space-between;
+                padding: .5em;
+                margin: .5em;
+
+                input, textarea {
+                    background-color: @bgShade;
+                    color: @white;
+                    font-size: .8em;
+                }
             }
         }
     }

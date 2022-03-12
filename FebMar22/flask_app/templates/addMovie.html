@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Movies</title>
+</head>
+<body>
+    <header>
+        <h1>Our Movie Application</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <h1>Add Movie</h1>
+        <form action="/movies/create/" method="post">
+            <section>
+                <label for="title">Movie Title</label>
+                <input type="text" name="title">
+            </section>
+            <section>
+                <label for="year">Year</label>
+                <input type="text" name="year">
+            </section>
+            <section>
+                <label for="genre">Genre</label>
+                <input type="text" name="genre">
+            </section>
+            <section>
+                <label for="description">Description</label>
+                <textarea name="description" cols="30" rows="10"></textarea>
+            </section>
+            <button>Add Movie</button>
+        </form>
+    </main>
+    <footer>
+        <p>Made by FebMar 2022 Python Cohort</p>
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>
