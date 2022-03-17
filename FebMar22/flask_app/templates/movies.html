@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Movies</title>
+</head>
+<body>
+    <header>
+        <h1>Our Movie Application</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <div class="messages">
+        {% with messages = get_flashed_messages() %}
+            {%if messages %}
+                {% for m in messages %}
+                    <h5>{{m}}</h5>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <main>
+        <h1>Movies</h1>
+        <div class="row">
+            {% for movie in   movies %}
+                <div class="column">
+                    <h2>{{movie.title}}</h2>
+                    <h5>{{movie.genre}}</h5>
+                    <ul>
+                        <li><a href="/movies/{{movie.id}}/view/">View Movie</a></li>
+                        <li><a href="/movies/{{movie.id}}/edit/">Edit Movie</a></li>
+                        <li><a href="/movies/{{movie.id}}/delete/">Delete Movie</a></li>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        <button type='button' class='collapsible'>Connect Actors to Movies</button>
+        <div class="content">
+            <table>
+                <tr>
+                    <th>Movie Title</th>
+                    <th>Add Actor</th>
+                    <th>Actors Added</th>
+                </tr>
+                {% for movie in movies %}
+                    <tr>
+                        <td>{{movie.title}}</td>
+                        <td>
+                            <form action="/movies/{{movie.id}}/connectActor/" method='post'>
+                                <input type="hidden" name="movie_id" value={{movie.id}}>
+                                <section>
+                                    <label for="actor_id">Actors</label>
+                                    <select name="actor_id">
+                                        {% for actor in actors %}
+                                            <option value="{{actor.id}}">{{actor.actorName()}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <button>Add Actor</button>
+                                </section>
+                            </form>
+                        </td>
+                        <td>
+                            <ul>
+                                
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </main>
+    <footer>
+        <p>Made by FebMar 2022 Python Cohort</p>
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>
