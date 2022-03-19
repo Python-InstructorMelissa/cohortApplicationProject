@@ -24,29 +24,21 @@
         {% endwith %}
     </div>
     <main>
-        <h1>Add Movie</h1>
-        <form action="/movies/create/" method="post">
-            <section>
-                <label for="title">Movie Title</label>
-                <input type="text" name="title">
-            </section>
-            <section>
-                <label for="year">Year</label>
-                <input type="text" name="year">
-            </section>
-            <section>
-                <label for="genre">Genre</label>
-                <input type="text" name="genre">
-            </section>
-            <section>
-                <label for="description">Description</label>
-                <textarea name="description" cols="30" rows="10"></textarea>
-            </section>
-            <section>
-                <input type="hidden" name="user_id" value='{{user.id}}'>
-            </section>
-            <button>Add Movie</button>
-        </form>
+        <h1>Welcome to your Dashboard {{user.fullName()}}</h1>
+        <h2>Here are the movies you have uploaded</h2>
+        <table>
+            <tr>   
+                <th>Movie ID</th>
+                <th>Movie title</th>
+            </tr>
+            {% for movie in movies.movies %}
+            <!-- have to use movies.movies to get inside the actual list of movies not just what we called it in the controller -->
+                <tr>
+                    <td>{{movie.id}}</td>
+                    <td>{{movie.title}}</td>
+                </tr>
+            {% endfor %}
+        </table>
     </main>
     <footer>
         <p>Made by FebMar 2022 Python Cohort</p>

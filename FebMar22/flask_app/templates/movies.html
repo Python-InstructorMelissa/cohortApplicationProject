@@ -32,8 +32,10 @@
                     <h5>{{movie.genre}}</h5>
                     <ul>
                         <li><a href="/movies/{{movie.id}}/view/">View Movie</a></li>
-                        <li><a href="/movies/{{movie.id}}/edit/">Edit Movie</a></li>
-                        <li><a href="/movies/{{movie.id}}/delete/">Delete Movie</a></li>
+                        {% if movie.user_id == user.id %}
+                            <li><a href="/movies/{{movie.id}}/edit/">Edit Movie</a></li>
+                            <li><a href="/movies/{{movie.id}}/delete/">Delete Movie</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             {% endfor %}
@@ -44,7 +46,6 @@
                 <tr>
                     <th>Movie Title</th>
                     <th>Add Actor</th>
-                    <th>Actors Added</th>
                 </tr>
                 {% for movie in movies %}
                     <tr>
@@ -62,11 +63,6 @@
                                     <button>Add Actor</button>
                                 </section>
                             </form>
-                        </td>
-                        <td>
-                            <ul>
-                                
-                            </ul>
                         </td>
                     </tr>
                 {% endfor %}

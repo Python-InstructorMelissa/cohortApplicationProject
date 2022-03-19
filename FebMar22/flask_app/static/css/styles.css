@@ -34,6 +34,8 @@ h5 {
   color: #fff;
   padding: 1em;
   background-color: #fbff0070;
+  text-align: center;
+  max-width: 300px;
 }
 li {
   font-size: 1.4em;

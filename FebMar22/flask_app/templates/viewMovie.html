@@ -24,29 +24,23 @@
         {% endwith %}
     </div>
     <main>
-        <h1>Add Movie</h1>
-        <form action="/movies/create/" method="post">
-            <section>
-                <label for="title">Movie Title</label>
-                <input type="text" name="title">
-            </section>
-            <section>
-                <label for="year">Year</label>
-                <input type="text" name="year">
-            </section>
-            <section>
-                <label for="genre">Genre</label>
-                <input type="text" name="genre">
-            </section>
-            <section>
-                <label for="description">Description</label>
-                <textarea name="description" cols="30" rows="10"></textarea>
-            </section>
-            <section>
-                <input type="hidden" name="user_id" value='{{user.id}}'>
-            </section>
-            <button>Add Movie</button>
-        </form>
+        <h1>{{movie.title}}</h1>
+        <h5>{{movie.description}}</h5>
+        <ul>
+            <li>Genre: {{movie.genre}}</li>
+            <li>Year Released: {{movie.year}}</li>
+        </ul>
+        {% for user in users %}
+            {% if movie.user_id == user.id %}
+                <h5>{{user.fullName()}}</h5>
+            {% endif %}
+        {% endfor %}
+        <h2>The Actors in the Movie</h2>
+        <ul>
+            {% for actor in actors %}
+                <li>{{actor.theActor.actorName()}}</li>
+            {% endfor %}
+        </ul>
     </main>
     <footer>
         <p>Made by FebMar 2022 Python Cohort</p>

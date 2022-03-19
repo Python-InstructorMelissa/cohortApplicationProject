@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask_app.models.movieActor import MovieActor
+from flask_app.models import movieActor
 from  flask_app.models import actor
 
 class Movie:
@@ -13,7 +13,8 @@ class Movie:
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
         self.user_id = data['user_id']
-        self.actors = []
+        self.movieActor = None
+        self.theActor = None
 
     
     @classmethod
@@ -35,7 +36,7 @@ class Movie:
 
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO movie (title, year, genre, description) VALUES (%(title)s, %(year)s, %(genre)s, %(description)s);'
+        query = 'INSERT INTO movie (title, year, genre, description, user_id) VALUES (%(title)s, %(year)s, %(genre)s, %(description)s, %(user_id)s);'
         print('save movie model:', data)
         return connectToMySQL(cls.db).query_db(query, data)
 
@@ -53,21 +54,32 @@ class Movie:
     def movieActors(cls, data):
         query = 'SELECT * FROM movie LEFT JOIN movie_has_actor on movie.id = movie_has_actor.movie_id LEFT JOIN actor on movie_has_actor.actor_id = actor.id WHERE movie.id = %(id)s;'
         results = connectToMySQL(cls.db).query_db(query, data)
-        movie = cls(results[0])
+        # print("results in model: ", results)
+        theActors = []
+        # movie = cls(results[0])
         for row in results:
+            movie = cls(row)
             movieActorData = {
                 'id': row['movie_has_actor.id'],
                 'movie_id': row['movie_id'],
                 'actor_id': row['actor_id']
             }
-            movie.actors.append(MovieActor(movieActorData))
+            # Below line says var = file.Class(Class RowData)
+            movieActorRow = movieActor.MovieActor(movieActorData)
+            # line 61 (referencing the Class row or "self". self.movieActor from constructor (line 16) = the data)
+            movie.movieActor = movieActorRow
+            # this is another way to do the above 2 lines
+            # movie.movieActor = movieActor.MovieActor(movieActorData)
             actorData = {
                 'id': row['actor.id'],
-                'firstName': row['actor.firstName'],
-                'lastName': row['actor.lastName'],
+                'firstName': row['firstName'],
+                'lastName': row['lastName'],
                 'createdAt': row['actor.createdAt'],
                 'updatedAt': row['actor.updatedAt'],
             }
-            movie.actors.append(actor.Actor(actorData))
-        return movie
+            actorRow = actor.Actor(actorData)
+            movie.theActor = actorRow
+            # Below is appending the Class data that now has movie, movieActor, and theActor as a single object into the list created on line 58 inside this function
+            theActors.append(movie)
+        return theActors
 

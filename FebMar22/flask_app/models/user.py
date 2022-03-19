@@ -1,5 +1,7 @@
+from datetime import datetime
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+from flask_app.models.movie import Movie
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
@@ -13,6 +15,7 @@ class User:
         self.password = data['password']
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
+        self.movies = []
 
     def fullName(self):
         return f'{self.firstName} {self.lastName}'
@@ -79,3 +82,25 @@ class User:
     @classmethod
     def delete(cls, data):
         pass
+
+    @classmethod
+    def userMovies(cls, data):
+        query = 'SELECT * FROM user LEFT JOIN movie on user.id = movie.user_id WHERE user.id = %(id)s;'
+        results = connectToMySQL(cls.db).query_db(query, data)
+        print("1111111: ", results)
+        user = cls(results[0])
+        for row in results:
+            movieData = {
+                'id': row['movie.id'],
+                'title': row['title'],
+                'year': row['year'],
+                'genre': row['genre'],
+                'description': row['description'],
+                'createdAt': row['movie.createdAt'],
+                'updatedAt': row['movie.updatedAt'],
+                'user_id': row['user_id'],
+            }
+            print("2222222: ", movieData)
+            user.movies.append(Movie(movieData))
+            print("333333: ", user)
+        return user

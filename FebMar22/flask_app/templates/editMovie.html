@@ -24,28 +24,25 @@
         {% endwith %}
     </div>
     <main>
-        <h1>Add Movie</h1>
-        <form action="/movies/create/" method="post">
+        <h1>Update {{movie.title}}</h1>
+        <form action="/movies/{{movie.id}}/update/" method="post">
             <section>
                 <label for="title">Movie Title</label>
-                <input type="text" name="title">
+                <input type="text" name="title" value='{{movie.title}}'>
             </section>
             <section>
                 <label for="year">Year</label>
-                <input type="text" name="year">
+                <input type="text" name="year" value='{{movie.year}}'>
             </section>
             <section>
                 <label for="genre">Genre</label>
-                <input type="text" name="genre">
+                <input type="text" name="genre" value='{{movie.genre}}'>
             </section>
             <section>
                 <label for="description">Description</label>
-                <textarea name="description" cols="30" rows="10"></textarea>
+                <textarea name="description" cols="30" rows="10">{{movie.description}}</textarea>
             </section>
-            <section>
-                <input type="hidden" name="user_id" value='{{user.id}}'>
-            </section>
-            <button>Add Movie</button>
+            <button>Update {{movie.title}}</button>
         </form>
     </main>
     <footer>
