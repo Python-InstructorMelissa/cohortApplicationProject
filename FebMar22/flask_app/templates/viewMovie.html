@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Movies</title>
+</head>
+<body>
+    <header>
+        <h1>Our Movie Application</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <div class="messages">
+        {% with messages = get_flashed_messages() %}
+            {%if messages %}
+                {% for m in messages %}
+                    <h5>{{m}}</h5>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <main>
+        <h1>{{movie.title}}</h1>
+        <h5>{{movie.description}}</h5>
+        <ul>
+            <li>Genre: {{movie.genre}}</li>
+            <li>Year Released: {{movie.year}}</li>
+        </ul>
+        {% for user in users %}
+            {% if movie.user_id == user.id %}
+                <h5>{{user.fullName()}}</h5>
+            {% endif %}
+        {% endfor %}
+        <h2>The Actors in the Movie</h2>
+        <ul>
+            {% for actor in actors %}
+                <li>{{actor.theActor.actorName()}}</li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer>
+        <p>Made by FebMar 2022 Python Cohort</p>
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>
